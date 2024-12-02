@@ -1,0 +1,171 @@
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./style.css">
+  <title>MetaStudy Hub</title>
+
+  <style>
+    /* General Styling */
+    body {
+        font-family: 'Arial', sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+    }
+
+    /* Chat Icon */
+    .chat-icon {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 60px;
+        height: 60px;
+        background-color: #4caf50;
+        color: #fff;
+        border: none;
+        border-radius: 50%;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        font-size: 1.5rem;
+        cursor: pointer;
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .chat-icon:hover {
+        background-color: #45a049;
+        transform: scale(1.1);
+    }
+
+    /* Chat Box */
+    .chat-box {
+        position: fixed;
+        bottom: 80px;
+        right: 20px;
+        width: 350px;
+        height: 500px;
+        background: #fff;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        display: none; /* Initially hidden */
+        flex-direction: column;
+        overflow: hidden;
+        z-index: 1000;
+    }
+
+    .chat-header {
+        background-color: #4caf50;
+        color: #fff;
+        padding: 10px;
+        font-size: 18px;
+        text-align: center;
+    }
+
+    .chat-messages {
+        flex: 1;
+        padding: 10px;
+        overflow-y: auto;
+        background-color: #f9f9f9;
+    }
+
+    .chat-controls {
+        display: flex;
+        gap: 10px;
+        padding: 10px;
+        border-top: 1px solid #ddd;
+    }
+
+    .chat-input {
+        flex: 1;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+    }
+
+    .send-btn {
+        padding: 10px 15px;
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .send-btn:hover {
+        background-color: #45a049;
+    }
+</style>
+  
+</head>
+<body>
+
+  <!-- Start Page -->
+  <div id="startPage">
+    <div class="text" id="launchMeta">Launch Meta</div>
+  </div>
+ 
+  
+  <!-- Laptop Interface -->
+  <div id="laptop">
+    <h1>Streams & Subjects</h1>
+  
+    <!-- Dropdown for selecting streams -->
+    <select id="stream-dropdown" style="display:none;">
+      <option value="BE/BTech">BE/BTech</option>
+      <option value="BCA">BCA</option>
+      <option value="BSc-CS">BSc-CS</option>
+      <option value="Bpharma">Bpharma</option>
+      <option value="DPharma">DPharma</option>
+      <option value="Polytechnic Diploma">Polytechnic Diploma</option>
+      <option value="BBA">BBA</option>
+      <option value="BSc(PCM or PCB)">BSc(PCM or PCB)</option>
+      <option value="BA">BA</option>
+      <option value="BCOM">BCOM</option>
+      <option value="BALLB">BALLB</option>
+    </select>
+  
+    <!-- Div to display subjects dynamically based on selected stream -->
+    <div id="subjects-container" style="display:none;" >
+      <!-- Subjects will be populated here based on selected stream -->
+    </div>
+  
+    <img id="closeLaptop" src="./cross.png" alt="multiply"/>
+    
+    
+  </div>
+  
+  <div id="floating_icon" class="floating_icon">
+    💬
+  </div>
+  <button class="chat-icon" id="chat-icon">💬</button>
+
+  <!-- Chat Box -->
+  <div class="chat-box" id="chat-box">
+      <div class="chat-header">Meta Study Hub Chat</div>
+      <div class="chat-messages" id="chat-messages"></div>
+      <div class="chat-controls">
+          <input type="text" id="chat-input" class="chat-input" placeholder="Type a message...">
+          <button id="send-btn" class="send-btn">Send</button>
+      </div>
+  </div>
+    
+ 
+  
+
+
+  
+
+  
+  
+  <script src="/socket.io/socket.io.js"></script>
+    <script type="module" src="./main.js"></script>
+
+  
+</body>
+</html>

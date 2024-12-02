@@ -1,0 +1,36 @@
+import * as THREE from 'three';
+
+async function init() {
+    // Scene, Camera, Renderer
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    document.body.appendChild(renderer.domElement);
+
+    // Capture screen
+    const video = document.createElement('video');
+    video.autoplay = true;
+    video.playsInline = true;
+    const stream = await navigator.mediaDevices.getDisplayMedia({ video: true });
+    video.srcObject = stream;
+
+    // Create VideoTexture
+    const videoTexture = new THREE.VideoTexture(video);
+    const material = new THREE.MeshBasicMaterial({ map: videoTexture });
+    const geometry = new THREE.PlaneGeometry(16, 9); // Adjust size
+    const screenMesh = new THREE.Mesh(geometry, material);
+    scene.add(screenMesh);
+
+    // Position camera
+    camera.position.z = 20;
+
+    // Animation loop
+    function animate() {
+        requestAnimationFrame(animate);
+        renderer.render(scene, camera);
+    }
+    animate();
+}
+
+init();
